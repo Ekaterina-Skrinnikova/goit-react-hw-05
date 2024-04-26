@@ -1,0 +1,13 @@
+.text {
+  font-size: 20px;
+  font-weight: 600;
+  color: orangered;
+}
+
+.active {
+  background-color: cadetblue;
+}
+
+.link {
+  background-color: white;
+}
