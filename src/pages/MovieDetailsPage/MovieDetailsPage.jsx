@@ -1,8 +1,6 @@
-import { Suspense, useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Suspense, useEffect, useState, useRef } from "react";
+import { Outlet, useParams, Link, useLocation } from "react-router-dom";
 import { getMovieId } from "../../movies-api";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import MovieInfo from "../../components/MovieInfo/MovieInfo";
 import css from "./MovieDetailsPage.module.css";
 
@@ -13,7 +11,7 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
 
   const location = useLocation();
-  const backLinkHref = location.state ?? "/movies";
+  const backLinkHrefRef = useRef(location.state) ?? "/movies";
 
   useEffect(() => {
     async function fetchMovieInfo() {
@@ -32,7 +30,7 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <Link className={css.link} to={backLinkHref}>
+      <Link className={css.link} to={backLinkHrefRef.current}>
         Go back
       </Link>
 

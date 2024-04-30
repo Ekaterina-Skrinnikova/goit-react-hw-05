@@ -1,13 +1,20 @@
 import css from "../SearchBar/SearchBar.module.css";
 
-export default function SearchBar({ value, onSubmit }) {
+export default function SearchBar({ onSubmit }) {
+  const handleSubmite = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    if (form.elements.query.value.trim() === "") {
+      alert("Please, enter text to search");
+    }
+    onSubmit(form.elements.query.value.trim());
+    form.reset();
+  };
+
   return (
     <header>
-      <form
-        className={css.container}
-        value={value}
-        onChange={(e) => onSubmit(e.target.value.trim())}
-      >
+      <form className={css.container} onSubmit={handleSubmite}>
         <input
           className={css.input}
           type="text"
